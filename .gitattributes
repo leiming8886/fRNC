@@ -1,1 +1,2 @@
 inst/extdata/hg/R2C.txt filter=lfs diff=lfs merge=lfs -text
+inst/extdata/hg/M2C.txt filter=lfs diff=lfs merge=lfs -text
