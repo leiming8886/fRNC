@@ -85,7 +85,7 @@ DEGs <- function(case.exp,control.exp,geneid,data_type){
 		fit12 = eBayes(fit11)
 		nor_data = exp1#exprs(exp1)
 		DEG1 = topTable(fit12,adjust.method ="BH",number = nrow(exp1))
-		DEG1 = cbind(as.numeric(rownames(DEG1)),DEG1)
+		DEG1 = cbind(as.character(rownames(DEG1)),DEG1)
 		colnames(DEG1)[c(1,5,6)] = c("genes","PValue","fdr")
 		one_ID <- rownames(nor_data)[1]
 		if(grepl("ENS",one_ID, ignore.case = T)){
