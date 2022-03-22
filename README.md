@@ -41,30 +41,37 @@ fRNC is freely available from GitHub.
 install.packages("devtools")
 library(devtools)
 # Step 2: Install fRNC
-devtools::install_github("leiming8886/fRNC",ref = "master")
+devtools::install_github("leiming8886/fRNC",ref = "main")
 library(fRNC)
 ```
 ## Example
 -------
 Below is a quick example of how the package can be used.
 We downloaded miRNA, mRNA and circRNA expression data of esophageal carcinoma (ESCA) and normal samples from TCGA and MiOncoCirc. 
-The miRNA, mRNA-seq data consist of 161 tumors with 11 normal samples in the TCGA, and circRNA data with 19 tumors and 25 normal samples
- in MiOncoCirc. The miRNA-lncRNA and miRNA-circRNA interactions were extracted from ENCORI with a high stringency, where the number of 
- the supported CLIP experimental evidence is 3 or greater. The R package edgeR was used to analyze the differentially expressed miRNAs, 
+The miRNA, mRNA-seq data consist of 161 tumors with 11 normal samples in the TCGA. The miRNA-lncRNA and miRNA-mRNA(RBP) interactions 
+belonged to the category " transcriptome " were extracted from ENCORI with a high stringency, where the number of the supported CLIP
+ experimental evidence is 3 or greater. The R package edgeR was used to analyze the differentially expressed miRNAs, 
  mRNAs and lncRNAs. The result was saved with the data "dataN". 
 ```R
 library(fRNC)
-data("dataN")
-gene2weight <- combinp(dataN[,c("type","logFC","PValue")])
-interac <- interStringency(type = "ncRNA",stringency = "strict")
-interac <- interac[,c("node_gene_ID","type","target_gene_ID")]
-res.list_global <- runmodule(network = interac, gene2weight, method = "global",FDR = 1e-14)
-res.list_local <- runmodule(network = interac, gene2weight, method = "local",
-maxsize=15, seletN = "MIMAT0000461")
+
+rm(list=ls())
+data("case.exp_miRNA")
+data("control.exp_miRNA")
+result_miR <- DEGs(case.exp_miRNA,control.exp_miRNA, geneid= rownames(control.exp_miRNA), data_type = "RNAseq_counts")
+data("case.exp_rna")
+data("control.exp_rna")
+result_rna <- DEGs(case.exp_rna,control.exp_rna, geneid= rownames(control.exp_rna), data_type = "RNAseq_counts")
+gene2weight <- combinp(dataNo[,c("type","logFC","PValue")], islog = T)
+interac_rbp <- interStringency(type = "transcription", spec ="hg",stringency = "high")
+interac_rbp <- interac_rbp[,c("node_gene_ID","type","target_gene_ID")]
+res.list_global <- runmodule(network = interac_rbp, gene2weight, method = "global", FDR = 1e-10)
+res.list_local <- runmodule(network = interac_rbp, gene2weight, method = "local", maxsize=15, seletN = c("MIMAT0000089") )
+
 ```
 Save global and local module results respectively. And, the result was saved as XGMML file and then observed it in the Cytoscape environment.
 ```R
-saveNetwork(res.list_global$module,file="ceRNA_module",type = "XGMML")
+saveNetwork(res.list_global$module,file="ceRNA_module_transcription",type = "XGMML")
 savelocalM(res.list_local)
 ```
 
