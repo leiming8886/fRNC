@@ -49,13 +49,13 @@ interStringency <- function(type = c("Protein","transcription"),spec = c("hg","m
   switch( type,
           "Protein"={
 			if( specID == "hg"){
-			dataR2C <- read.table(system.file("extdata/hg/", "R2C.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataR2R <- read.table(system.file("extdata/hg/", "R2R.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataR2L <- read.table(system.file("extdata/hg/", "R2L.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataR2M <- read.table(system.file("extdata/hg/", "R2M.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			#dataM2R <- read.table(system.file("extdata/hg/", "M2R.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataM2L <- read.table(system.file("extdata/hg/", "M2L.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataM2C <- read.table(system.file("extdata/hg/", "M2C.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "hg_r2c.Rdata", package = "fRNC", mustWork = TRUE))#dataR2C
+			load(system.file("extdata/", "hg_r2r.Rdata", package = "fRNC", mustWork = TRUE))#dataR2R
+			load(system.file("extdata/", "hg_r2l.Rdata", package = "fRNC", mustWork = TRUE))#dataR2L
+			load(system.file("extdata/", "hg_r2m.Rdata", package = "fRNC", mustWork = TRUE))#dataR2M
+			#load(system.file("extdata/", "hg_m2r.Rdata", package = "fRNC", mustWork = TRUE))#dataM2R
+			load(system.file("extdata/", "hg_m2l.Rdata", package = "fRNC", mustWork = TRUE))#dataM2L
+			load(system.file("extdata/", "hg_m2c.Rdata", package = "fRNC", mustWork = TRUE))#dataM2C
             interaction <-rbind(dataR2C,dataR2L)
 			R2R <- dataR2R
 			R2M <- dataR2M
@@ -64,13 +64,13 @@ interStringency <- function(type = c("Protein","transcription"),spec = c("hg","m
 			interaction <-rbind(interaction,dataM2C)
 			}
 			if( specID == "mm"){
-			dataR2C <- read.table(system.file("extdata/mm/", "R2C.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataR2R <- read.table(system.file("extdata/mm/", "R2R.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataR2L <- read.table(system.file("extdata/mm/", "R2L.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataR2M <- read.table(system.file("extdata/mm/", "R2M.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			#dataM2R <- read.table(system.file("extdata/mm/", "M2R.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataM2L <- read.table(system.file("extdata/mm/", "M2L.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataM2C <- read.table(system.file("extdata/mm/", "M2C.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "mm_r2c.Rdata", package = "fRNC", mustWork = TRUE))#dataR2C
+			load(system.file("extdata/", "mm_r2r.Rdata", package = "fRNC", mustWork = TRUE))#dataR2R
+			load(system.file("extdata/", "mm_r2l.Rdata", package = "fRNC", mustWork = TRUE))#dataR2L
+			load(system.file("extdata/", "mm_r2m.Rdata", package = "fRNC", mustWork = TRUE))#dataR2M
+			#load(system.file("extdata/", "hg_m2r.Rdata", package = "fRNC", mustWork = TRUE))#dataM2R
+			load(system.file("extdata/", "mm_m2l.Rdata", package = "fRNC", mustWork = TRUE))#dataM2L
+			load(system.file("extdata/", "mm_m2c.Rdata", package = "fRNC", mustWork = TRUE))#dataM2C
             interaction <-rbind(dataR2C,dataR2L)
 			R2R <- dataR2R
 			R2M <- dataR2M
@@ -81,13 +81,9 @@ interStringency <- function(type = c("Protein","transcription"),spec = c("hg","m
           },
           "transcription"={
 			if( specID == "hg"){
-			#dataR2C <- read.table(system.file("extdata/hg/", "R2C.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			#dataR2R <- read.table(system.file("extdata/hg/", "R2R.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			#dataR2L <- read.table(system.file("extdata/hg/", "R2L.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			#dataR2M <- read.table(system.file("extdata/hg/", "R2M.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataM2R <- read.table(system.file("extdata/hg/", "M2R.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataM2L <- read.table(system.file("extdata/hg/", "M2L.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataM2C <- read.table(system.file("extdata/hg/", "M2C.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "hg_m2r.Rdata", package = "fRNC", mustWork = TRUE))#dataM2R
+			load(system.file("extdata/", "hg_m2l.Rdata", package = "fRNC", mustWork = TRUE))#dataM2L
+			load(system.file("extdata/", "hg_m2c.Rdata", package = "fRNC", mustWork = TRUE))#dataM2C
             #interaction <-rbind(dataR2C,dataR2L)
 			#R2R <- dataR2R
             interaction <-rbind(dataM2L,dataM2R)
@@ -95,13 +91,9 @@ interStringency <- function(type = c("Protein","transcription"),spec = c("hg","m
 			interaction <-rbind(interaction,dataM2C)
 			}
 			if( specID == "mm"){
-			#dataR2C <- read.table(system.file("extdata/mm/", "R2C.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			#dataR2R <- read.table(system.file("extdata/mm/", "R2R.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			#dataR2L <- read.table(system.file("extdata/mm/", "R2L.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			#dataR2M <- read.table(system.file("extdata/mm/", "R2M.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataM2R <- read.table(system.file("extdata/mm/", "M2R.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataM2L <- read.table(system.file("extdata/mm/", "M2L.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-			dataM2C <- read.table(system.file("extdata/mm/", "M2C.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "mm_m2r.Rdata", package = "fRNC", mustWork = TRUE))#dataM2R
+			load(system.file("extdata/", "mm_m2l.Rdata", package = "fRNC", mustWork = TRUE))#dataM2L
+			load(system.file("extdata/", "mm_m2c.Rdata", package = "fRNC", mustWork = TRUE))#dataM2C
             #interaction <-rbind(dataR2C,dataR2L)
 			#R2R <- dataR2R
             interaction <-rbind(dataM2L,dataM2R)

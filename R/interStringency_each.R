@@ -18,77 +18,77 @@ interStringency_each <- function(type = c("M2L","M2C","M2R","R2L","R2M","R2C","R
   switch( type,
         "M2L"={
 			if( specID == "hg"){
-			dataM2L <- read.table(system.file("extdata/hg/", "M2L.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "hg_m2l.Rdata", package = "fRNC", mustWork = TRUE))#dataM2L
             interaction <-dataM2L
 			}
 			if( specID == "mm"){
-			dataM2L <- read.table(system.file("extdata/mm/", "M2L.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "mm_m2l.Rdata", package = "fRNC", mustWork = TRUE))#dataM2L
             interaction <-dataM2L
 			}
 			}
 		,	
 		"M2C"={
 			if( specID == "hg"){
-			dataM2C <- read.table(system.file("extdata/hg/", "M2C.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "hg_m2c.Rdata", package = "fRNC", mustWork = TRUE))#dataM2C
             interaction <-dataM2C
 			}
 			if( specID == "mm"){
-			dataM2C <- read.table(system.file("extdata/mm/", "M2C.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "mm_m2c.Rdata", package = "fRNC", mustWork = TRUE))#dataM2C
             interaction <-dataM2C
 			}
 			}
 		,	
 		"M2R"={
 			if( specID == "hg"){
-			dataM2R <- read.table(system.file("extdata/hg/", "M2R.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "hg_m2r.Rdata", package = "fRNC", mustWork = TRUE))#dataM2R
             interaction <-dataM2R
 			}
 			if( specID == "mm"){
-			dataM2R <- read.table(system.file("extdata/mm/", "M2R.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "mm_m2r.Rdata", package = "fRNC", mustWork = TRUE))#dataM2R
             interaction <-dataM2R
 			}
 			}
 		,
 		"R2L"={
 			if( specID == "hg"){
-			dataR2L <- read.table(system.file("extdata/hg/", "R2L.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "hg_r2l.Rdata", package = "fRNC", mustWork = TRUE))#dataR2L
             interaction <-dataR2L
 			}
 			if( specID == "mm"){
-			dataR2L <- read.table(system.file("extdata/mm/", "R2L.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "mm_r2l.Rdata", package = "fRNC", mustWork = TRUE))#dataR2L
             interaction <-dataR2L
 			}
 			}	
 		,	
 		"R2M"={
 			if( specID == "hg"){
-			dataR2M <- read.table(system.file("extdata/hg/", "R2M.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
-            interaction <-dataR2M
+			load(system.file("extdata/", "hg_r2m.Rdata", package = "fRNC", mustWork = TRUE))#dataR2M
+			interaction <-dataR2M
 			}
 			if( specID == "mm"){
-			dataR2M <- read.table(system.file("extdata/mm/", "R2M.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "mm_r2m.Rdata", package = "fRNC", mustWork = TRUE))#dataR2M
             interaction <-dataR2M
 			}
 			}
 		,	
 		"R2C"={
 			if( specID == "hg"){
-			dataR2C <- read.table(system.file("extdata/hg/", "R2C.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "hg_r2c.Rdata", package = "fRNC", mustWork = TRUE))#dataR2C
             interaction <-dataR2C
 			}
 			if( specID == "mm"){
-			dataR2C <- read.table(system.file("extdata/mm/", "R2C.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "mm_r2c.Rdata", package = "fRNC", mustWork = TRUE))#dataR2C
             interaction <-dataR2C
 			}
 			}
 		,	
 		"R2R"={
 			if( specID == "hg"){
-			dataR2R <- read.table(system.file("extdata/hg/", "R2R.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "hg_r2r.Rdata", package = "fRNC", mustWork = TRUE))#dataR2R
             interaction <-dataR2R
 			}
 			if( specID == "mm"){
-			dataR2R <- read.table(system.file("extdata/mm/", "R2R.txt", package = "fRNC", mustWork = TRUE),header = T,sep="\t")
+			load(system.file("extdata/", "mm_r2r.Rdata", package = "fRNC", mustWork = TRUE))#dataR2R
             interaction <-dataR2R
 			}
 			}
