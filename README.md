@@ -62,6 +62,7 @@ result_miR <- DEGs(case.exp_miRNA,control.exp_miRNA, geneid= rownames(control.ex
 data("case.exp_rna")
 data("control.exp_rna")
 result_rna <- DEGs(case.exp_rna,control.exp_rna, geneid= rownames(control.exp_rna), data_type = "RNAseq_counts")
+dataNo <- rbind(result_miR$DEGs, result_rna$DEGs)
 gene2weight <- combinp(dataNo[,c("type","logFC","PValue")], islog = T)
 interac_rbp <- interStringency(type = "transcription", spec ="hg",stringency = "high")
 interac_rbp <- interac_rbp[,c("node_gene_ID","type","target_gene_ID")]
