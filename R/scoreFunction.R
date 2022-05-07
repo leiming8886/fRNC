@@ -30,6 +30,9 @@ bumOptim <- function (x, starts = 1, labels = NULL)
             value <- opt$value
             best <- opt
         }
+		if(value > 0){
+		break
+		}
     }
     if (length(best) == 0) {
         return(warning("BUM model could not be fitted to data"))
