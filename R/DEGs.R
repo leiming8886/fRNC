@@ -23,14 +23,25 @@
 #'}
 #' @export
 DEGs <- function(case.exp,control.exp,geneid,data_type){
+	## some ----------------------------------------------------
+	# https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/
+	fpkmToTpm <- function(fpkm)
+	{
+		exp(log(fpkm) - log(sum(fpkm)) + log(1e6))
+	}
+	normalize_rna <-function(counts,number = 3){
+          keep.counts <- ( rowMeans(counts) >= 0 ) & ( rowSums(counts > 0) >= number )
+          counts <- counts[keep.counts, ]
+          return(counts)
+	}
 	if(data_type=="RNAseq_counts"){
 		#library(edgeR)
 		exp1=cbind(case.exp,control.exp)
 		rownames(exp1)=geneid
-		group=factor(c(rep("case",ncol(case.exp)),rep("control",ncol(control.exp))))
+		group=factor(c(rep("Tumor",ncol(case.exp)),rep("Normal",ncol(control.exp))))
 		design <- model.matrix(~ 0+group)
 		colnames(design) <- levels(group)
-		contrast.matrix <- makeContrasts(contrasts = "case-control",
+		contrast.matrix <- makeContrasts(contrasts = "Tumor-Normal",
                                  levels = design)
 		#创建edgeR数据格式
 		data1=DGEList(counts=exp1,genes=geneid,group=group)
@@ -72,15 +83,15 @@ DEGs <- function(case.exp,control.exp,geneid,data_type){
 		}
 		DEGlist=list(DEGs = DEG_type,Nor_expr = nor_data, data_type = data_type, algorithm = "edgeR")
 	}
-	if(data_type=="fpkm"|data_type=="microarray"){
+	if(data_type=="microarray"){
 		#library(limma)
-		labe1 = c(rep(1,ncol(case.exp)),rep(0,ncol(control.exp)))
+		labe1 = factor(c(rep("Tumor",ncol(case.exp)),rep("Normal",ncol(control.exp))))
 		exp1 = cbind(case.exp,control.exp)
 		rownames(exp1) = geneid
-		design1 = model.matrix(~0+factor(labe1))
-		colnames(design1) = c("case","control")
+		design1 = model.matrix(~0+labe1)
+		colnames(design1) = levels(labe1)
 		fit1 = lmFit(exp1,design1)
-		contrast.matrix = makeContrasts(contrasts = "case-control",levels=design1)
+		contrast.matrix = makeContrasts(contrasts = "Tumor-Normal",levels=design1)
 		fit11 = contrasts.fit(fit1,contrast.matrix)
 		fit12 = eBayes(fit11)
 		nor_data = exp1#exprs(exp1)
@@ -95,20 +106,70 @@ DEGs <- function(case.exp,control.exp,geneid,data_type){
 		  DEG_type <- DEG_type[order(DEG_type$PValue),]
 		}
 		if(grepl("MIMAT",one_ID, ignore.case = T)){
-		  type <- c(rep("miRNA",dim(DEG)[1]))
+		  type <- c(rep("miRNA",dim(DEG1)[1]))
 		  DEG_type <- cbind(DEG1,type)
 
 		  rownames(DEG_type) <- DEG_type$genes
 		  DEG_type <- DEG_type[order(DEG_type$PValue),]
 		}
 		if(grepl("circ",one_ID, ignore.case = T)){
-		  type <- c(rep("circRNA",dim(DEG)[1]))
+		  type <- c(rep("circRNA",dim(DEG1)[1]))
 		  DEG_type <- cbind(DEG1,type)
 
 		  rownames(DEG_type) <- DEG_type$genes
 		  DEG_type <- DEG_type[order(DEG_type$PValue),]
 		}
 		DEGlist = list(DEGs = DEG_type, Nor_expr = nor_data, data_type=data_type, algorithm="limma")
+	}
+	if(data_type=="TPM"|| data_type=="FPKM"){
+		#比较靠谱的方法是limma-trend，以log2(TPM+1)替代logCPM以limma使用手册中15.4章。
+		library(limma)
+		labe1 = factor(c(rep("Tumor",ncol(case.exp)),rep("Normal",ncol(control.exp))))
+		exp1 = cbind(case.exp,control.exp)
+		#FPKM convert to TPM
+		if(data_type == "FPKM"){
+		exp1 <- apply(exp1,2,fpkmToTpm)
+		}
+		#log2(TPM+1)
+		exp1 <- log2(exp1 + 1)
+		rownames(exp1) = geneid
+		### remove lowly expressed genes，mean of gene >0 and rowSum of (gene >0) > half of sample
+		exp1 <- normalize_rna(exp1,number = (ncol(exp1)/2))
+		#limma归一化
+		exp2 <- normalizeBetweenArrays(exp1)
+		design1 = model.matrix(~0+labe1)
+		colnames(design1) = levels(labe1)
+		fit1 = lmFit(exp2,design1)
+		contrast.matrix = makeContrasts(contrasts = "Tumor-Normal",levels=design1)
+		fit2 = contrasts.fit(fit1,contrast.matrix)
+		#trend = TRUE
+		fit3 = eBayes(fit2,trend = TRUE)
+		nor_data = exp1#exprs(exp1)
+		DEG1 = topTable(fit3,adjust.method ="BH",number = nrow(exp2))
+		DEG1 = cbind(as.character(rownames(DEG1)),DEG1)
+		colnames(DEG1)[c(1,5,6)] = c("genes","PValue","fdr")
+		one_ID <- rownames(nor_data)[1]
+		if(grepl("ENS",one_ID, ignore.case = T)){
+		  DEG_type <- merge(DEG1,fRNC::IDsymbol[,c("genes","type")], by="genes", all.x=TRUE)
+		  DEG_type <- DEG_type[!duplicated(DEG_type),]
+		  rownames(DEG_type) <- DEG_type$genes
+		  DEG_type <- DEG_type[order(DEG_type$PValue),]
+		}
+		if(grepl("MIMAT",one_ID, ignore.case = T)){
+		  type <- c(rep("miRNA",dim(DEG1)[1]))
+		  DEG_type <- cbind(DEG1,type)
+
+		  rownames(DEG_type) <- DEG_type$genes
+		  DEG_type <- DEG_type[order(DEG_type$PValue),]
+		}
+		if(grepl("circ",one_ID, ignore.case = T)){
+		  type <- c(rep("circRNA",dim(DEG1)[1]))
+		  DEG_type <- cbind(DEG1,type)
+
+		  rownames(DEG_type) <- DEG_type$genes
+		  DEG_type <- DEG_type[order(DEG_type$PValue),]
+		}
+		DEGlist = list(DEGs = DEG_type, Nor_expr = nor_data, data_type = data_type, algorithm="limma")
 	}
 	return(DEGlist)
 }

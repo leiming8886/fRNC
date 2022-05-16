@@ -23,6 +23,9 @@ saveNetwork <- function (network, name = "network", file, type = c("table",
 {
     file <- .cleanFile(file)
     type <- match.arg(type)
+    if (is.null(V(network)$ID)) {
+        V(network)$ID <- as.character(V(network)$name)
+    }
     if (is.null(V(network)$name)) {
         #V(network)$name <- as.character(V(network))
         V(network)$name <- as.character(V(network)$symbol)

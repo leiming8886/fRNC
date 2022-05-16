@@ -21,19 +21,23 @@ bumOptim <- function (x, starts = 1, labels = NULL)
     lambda <- runif(starts, 0.3, 0.7)
     value <- Inf
     best <- list()
+	
     for (i in 1:starts) {
         test.optim <- try(opt <- optim(c(lambda[i], a[i]), fn = .fbumnLL,
             gr = .fpLL, x = x, lower = rep(1e-05, 3), method = "L-BFGS-B",
             upper = rep(1 - 1e-05, 3)))
         if ((!class(test.optim) == "try-error") && all(opt$par >=
             1e-05) && all(opt$par <= 1 - 1e-05)) {
+			if( (opt$value > 0)  || (abs(value) >= abs(opt$value))){
             value <- opt$value
             best <- opt
+			}
         }
-		if(value > 0){
-		break
-		}
+		#if(value > 0){
+		#break
+		#}
     }
+	
     if (length(best) == 0) {
         return(warning("BUM model could not be fitted to data"))
     }
