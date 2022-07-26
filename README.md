@@ -47,7 +47,7 @@ library(fRNC)
 ## Example
 -------
 Below is a quick example of how the package can be used.
-We downloaded miRNA, mRNA and circRNA expression data of esophageal carcinoma (ESCA) and normal samples from TCGA and MiOncoCirc. 
+We downloaded miRNA, mRNA and circRNA expression data of esophageal carcinoma (ESCA) and normal samples from TCGA. 
 The miRNA, mRNA-seq data consist of 161 tumors with 11 normal samples in the TCGA. The miRNA-lncRNA and miRNA-mRNA(RBP) interactions 
 belonged to the category " transcriptome " were extracted from ENCORI with a high stringency, where the number of the supported CLIP
  experimental evidence is 3 or greater. The R package edgeR was used to analyze the differentially expressed miRNAs, 
