@@ -20,6 +20,8 @@ survival.rna <- function(gene_profile = NULL, clinData = NULL){
 	#p_three<-c()
 	genename <- rownames(gene_profile)
 	for ( i in 1:length(genename)){
+		#i=1
+		#cat(i,"\n")
 		gene<-gene_profile[which(rownames(gene_profile)==genename[i]),]
 		gene=as.matrix(gene)
 		n1<-grep(paste("^",0,"$",sep=""),perl=T,gene)
@@ -33,6 +35,7 @@ survival.rna <- function(gene_profile = NULL, clinData = NULL){
 	t1<-coxph(survival::Surv(time, status) ~ x , test1)
 	cox_gene<-c(cox_gene,summary(t1)[[7]][1])
 	p_gene <- rbind(p_gene,c(as.character(genename[i]),summary(t1)[[7]][5]))
+	
 	}
 	#result = list(surP_mir = p_mir, surP_gene= p_gene)
 	#p_gene
