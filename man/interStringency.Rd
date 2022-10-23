@@ -33,7 +33,7 @@ interactions were extracted according to stringency and interaction type in the 
 #data("dataM2R")
 #data("dataR2C")
 #data("dataR2L")
- interac <- interStringency(type = "miRNA",stringency = "strict")
+ interac <- interStringency(type = "Protein",spec ="hg", stringency = "strict")
  interac <- interac[,c("node_gene_ID","target_gene_ID")]
 }
 

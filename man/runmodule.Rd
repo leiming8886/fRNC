@@ -24,7 +24,7 @@ runmodule(
 \item{network}{A data frame containing a symbolic edge list of the ncRNA network in which the columns must contain "node_gene_ID", "type", "target_gene_Name"}
 
 \item{gene2weight}{A weigth data frame containing three columns:"type","gene", "weight"
-the first "type" the type of the gene identifier; lncRNA, miRNA, circRNA
+the first "type" the type of the gene identifier; lncRNA, miRNA, circRNA and RBP
 the second gene is unique, gene identifier (should be coordinate with the node symbol used in ncRNA network);
 the third weight is gene-based  p-value or corrected p-value derived from differentially gene analysis or survival analysis}
 
@@ -45,7 +45,7 @@ The FDR can be used to control the size of the maximum scoring module}
 \item{maxsize}{An integer: the numbel of size of the module for user settings in the method of "global", default 15.}
 
 \item{issymbol}{Boolean value, whether to set the node attribute "symbol"(gene symbol) in the network.
-@return \code{runmodule_1} returns a list containing relevant data and results,
+@return \code{runmodule} returns a list containing relevant data and results,
  including:
 \tabular{ll}{
   \code{GNCW} \tab the node-weighted network used for searching \cr
@@ -62,7 +62,7 @@ normalizes module scores using simulation data, removes un-qualified modules, an
 \dontrun{
 data("dataN")
 gene2weight <- combinp(dataN[,c("type","logFC","PValue")])
-interac <- interStringency(type = "ncRNA", spec ="hg",stringency = "strict")
+interac <- interStringency(type = "transcription", spec ="hg",stringency = "strict")
 interac <- interac[,c("node_gene_ID","type","target_gene_ID")]
  res.list_global <- runmodule(network = interac, gene2weight, method = "global",FDR = 1e-14)
  res.list_local <- runmodule(network = interac, gene2weight, method = "local",
