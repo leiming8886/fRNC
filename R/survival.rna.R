@@ -1,3 +1,19 @@
+#' @title Performe univariate Cox regression analysis
+#'
+#' @description univariate Cox regression analysis using survival with survival data and expression data
+#'
+#' @param gene_profile the expression value matrix, in which the row name is gene id and the column name is sample id
+#' @param clinData the survival data, in which the column name is sample id, Survival(time) and Status(0,1)
+#'
+#' @return surivallist contain two elements,
+#'  rna_p the survival result,in which the column name is gene id, P-value(from a univariable Cox proportional
+#'	hazards regression model) and gene type(0,1)
+#'  algorithm  a character string indicating which algorithm  was used with univariable Cox
+#'
+#' @export
+
+
+
 survival.rna <- function(gene_profile = NULL, clinData = NULL){
 	#library("survival")
 	#library("survminer")

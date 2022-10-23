@@ -1,4 +1,17 @@
-survival.km <- function(gene_profile = NULL, clinData = NULL,genes= NULL,filename="temp1"){
+#' @title Performe univariate Cox regression analysis and plot Kaplan-Meier curve of the RNC module
+#'
+#' @description univariate Cox regression analysis using survival with survival data and expression data,and Patients with higher and lower than the median risk score of the he 
+#' dysregulated RNC are classified into different groups. Kaplan-Meier survival analysis was used to assess the clinical significance between the comparison groups
+#' @param gene_profile the expression value matrix, in which the row name is gene id and the column name is sample id
+#' @param clinData the survival data, in which the column name is sample id, Survival(time) and Status(0,1)
+#' @param genes the gene in the RNC, The name of mature miRNA is miRbase ID, and name of lncRNA and RBP is Ensemble gene ID
+#' @param filename the output figure name in Kaplan-Meier curve
+
+#' @return contain the figure with the pdf format in Kaplan-Meier curve
+#' @export
+
+
+survival.km <- function(gene_profile = NULL, clinData = NULL,genes= NULL,filename="temp"){
 	#library("survival")
 	#library("survminer")
 	#gene_profile = case_exp
