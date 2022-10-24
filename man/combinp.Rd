@@ -15,7 +15,7 @@ combinp(node_attr = NULL, islog = T)
 A data matrix containing three columns: type, gene, weight(corrected p-value), the row name is the gene identifier.
 }
 \description{
-based on the formula: corrected p-value = 2*( 1-pnorm( (-log10( p-value )) * abs( log2FC )) ), corrected p-value was generated
+based on the formula: corrected p-value = 2*( 1-pnorm( (-log10( p-value )) * abs( log2FC )) )  , corrected p-value was generated
 }
 \examples{
 data("dataN")

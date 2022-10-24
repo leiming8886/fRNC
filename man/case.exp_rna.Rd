@@ -8,7 +8,7 @@
 data("case.exp_rna")
 }
 \description{
-RNA-seq expression data in the ECSA cancer samples, the row names are RNA mirbase IDS, the column names are sample names in which last two sign is 01
+RNA-seq expression data in the ECSA cancer samples, the row names are RNA mirbase IDs, the column names are sample names in which last two identifier is 01
 }
 \examples{
 data("case.exp_rna")
