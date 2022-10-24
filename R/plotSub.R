@@ -14,7 +14,8 @@
 
 #' @examples
 #' library(igraph)
-#' edgel <- cbind(c("1", "2", "3", "4", "5", "6", "7"), c("b", "c", "d", "e", "f", "a", "b"))
+#' edgel <- cbind(c("1", "2", "3", "4", "5", "6", "7"),
+#' c("b", "c", "d", "e", "f", "a", "b"))
 #' g <- graph.edgelist(edgel, directed=TRUE)
 #' V(g)$type <- c(rep("lncRNA",4),rep("miRNA",4),rep("circRNA",5))
 #' plotSub(g)

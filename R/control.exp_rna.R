@@ -1,6 +1,6 @@
 #'  RNA-seq expression data in the ECSA normal samples
 #'
-#' @description RNA-seq expression data in the ECSA normal samples, the row names are RNA mirbase IDS, the column names are sample names in which last two sign is 11
+#' @description RNA-seq expression data in the ECSA normal samples, the row names are RNA mirbase IDs, the column names are sample names in which last two identifier is 11
 #'
 #' @docType data
 #'

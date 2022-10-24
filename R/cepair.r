@@ -1,18 +1,3 @@
-#' @title extract lncRNA-circRNA ceRNA pair
-#'
-#' @description extract lncRNA-circRNA ceRNA pair
-#'
-#' @param interac the interaction data matrix, in which the column name contain "node_gene_ID", "type" and  "target_gene_ID"
-#' @param N_mi  a numeric value, shared miRNAs by a lncRNA and circRNA
-#'
-#' @return interac_temp the interaction data matrix, in which the column name contain "node_gene_ID", "type" and  "target_gene_ID"
-#' @examples
-#' \dontrun{
-#' interac <- interStringency(type = "ncRNA", stringency = "strict")
-#' interac_strict_p_50 <- cepair(interac, N_mi= 50)
-#' }
-#' @export
-
 cepair <- function (interac,N_mi= 50){
 
 

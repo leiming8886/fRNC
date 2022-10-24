@@ -1,19 +1,24 @@
-#' @title save of the subnetwork
+#' @title save the subnetwork with global method
 #'
-#' @description The function plots a network from graphNEL or igraph format. It is used to visualize the modules. For further plotting options use the plot.igraph
-#' function of the igraph package. The shapes of the nodes can be changed according to the scores argument, then negative scores appear squared
-#' The color of the nodes can be changed according to the diff.expr argument. Negative(positive) values lead to green(red) nodes.
+#' @description The function plots a RNC subnetwork from graphNEL or igraph format. It is used to visualize the modules. For further plotting options use the plot.igraph
+#' function of the igraph package. The shapes of the nodes can be changed according to the scores argument
 #'
 #' @param network A graph in igraph or graphNEL format.
 #' @param name Name of the network, only needed for the XGMML format.
 #' @param file File name to save.
 #' @param type Type in which graph shall be saved.
 #' @examples
-#' library(igraph)
-#' edgel <- cbind(c("1", "2", "3", "4", "5", "6", "7"), c("b", "c", "d", "e", "f", "a", "b"))
-#' g <- graph.edgelist(edgel, directed=TRUE)
-#' V(g)$type <- c(rep("lncRNA",4),rep("miRNA",4),rep("circRNA",5))
-#' saveNetwork(g,file ="g", type = "XGMML")
+#' \dontrun{
+#' data("dataN")
+#' gene2weight <- combinp(dataN[,c("type","logFC","PValue")])
+#' interac <- interStringency(type = "transcription", spec ="hg",
+#' 							stringency = "strict")
+#' interac <- interac[,c("node_gene_ID","type","target_gene_ID")]
+#' res.list_global <- runmodule(network = interac, gene2weight,
+#' 								method = "global",FDR = 1e-14)
+#' saveNetwork(res.list_global$module,file="filenames",type = "XGMML")
+#' }
+#'
 #' @references Daniela Beisser, Gunnar W. Klau, Thomas Dandekar et al. (2010) BioNet: an R-Package for the functional analysis of biological networks
 #'
 #' @export

@@ -1,29 +1,3 @@
-#' @title survival analysis
-#'
-#' @description The function calculate the P-values from a univariable Cox proportional hazards regression model
-#' between survival data and corresponding expression of node. First, the overlap of the sample IDs among the survival data and
-#' the two expression data is obtained, then based on the overlap sample IDs, the p-value of every node from a univariable Cox proportional
-#' hazards regression model is calculated on the R package survival.
-#'
-#' @param miRNA_profile the miRNA expressin data matrix,in which the row name is gene id and the column name is sample id.
-#' @param gene_profile the mRNA expressin data matrix,in which the row name is gene id and the column name is sample id.
-#' @param clinData the data matrix of survival data,in which the column name is "ID"(sample IDs),  "Survival"(months) and "Status"(0,1)
-#' @return surivallis list contain three elements,
-#'  miR_p the p-value matrix of IDs,
-#'  rna_p the p-value matrix of IDs,
-#'  algorithm  a character string indicating which algorithm  was used
-#'
-#' @examples
-#' \dontrun{
-#' result_miR <- DEGs(case.exp_miRNA,control.exp_miRNA,
-#' geneid= rownames(control.exp_miRNA),data_type = "RNAseq_counts")
-#' result_rna <- DEGs(case.exp_rna,control.exp_rna,
-#' geneid= rownames(control.exp_rna), data_type = "RNAseq_counts")
-#' interac <- interac[,c("node_gene_ID","type","target_gene_ID")]
-#' survival.miR_rna(miRNA_profile=result_miR$Nor_expr,
-#' gene_profile = result_rna$Nor_expr, clinData = clinData)
-#' }
-#' @export
 
 survival.miR_rna <- function(miRNA_profile= NULL, gene_profile = NULL, clinData = NULL){
 	#library("survival")

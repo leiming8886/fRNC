@@ -1,6 +1,6 @@
 #' @title Generate corrected p-value based on p-value and logFC in the expression matrix
 #'
-#' @description based on the formula: corrected p-value = 2*( 1-pnorm( (-log10( p-value )) * abs( log2FC )) ), corrected p-value was generated
+#' @description based on the formula: corrected p-value = 2*( 1-pnorm( (-log10( p-value )) * abs( log2FC )) )  , corrected p-value was generated
 #'
 #' @param node_attr A data frame containing three columns: type, logFC and p value, and the row name is the gene identifier.
 #' @param islog Boolean value, whether to use the logFC, if FALSE, the weight is the p-value, or "TRUE", the corrected p-value is used

@@ -7,7 +7,7 @@
 #'
 #' @return surivallist contain two elements,
 #'  rna_p the survival result,in which the column name is gene id, P-value(from a univariable Cox proportional
-#'	hazards regression model) and gene type(0,1)
+#'	hazards regression model) and gene type(miRNA, lncRNA, RBP, circRNA)
 #'  algorithm  a character string indicating which algorithm  was used with univariable Cox
 #'
 #' @export

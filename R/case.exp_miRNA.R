@@ -1,6 +1,6 @@
 #'  miRNA-seq expression data in the ECSA cancer samples
 #'
-#' @description miRNA-seq expression data in the ECSA cancer samples, the row names are miRNA mirbase IDS, the column names are sample names in which last two sign is 01
+#' @description miRNA-seq expression data in the ECSA cancer samples, the row names are miRNA mirbase IDs, the column names are sample names in which last two identifier is 01
 #'
 #' @docType data
 #'

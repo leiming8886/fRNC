@@ -7,7 +7,7 @@
 #' @param geneid  gene id in the case or control expression matrix
 #' @param data_type a character string indicating which date type to deal with is to be choosed, One of "RNAseq_counts" , "fpkm" and "microarray": can be abbreviated
 #'
-#' @return DEGlist list contain four elements,
+#' @return DEGlist contain four elements,
 #'  DEGs the differential expression matrix,
 #'  Nor_expr the normalized expression matrix,
 #'  data_type a character string of the data type
