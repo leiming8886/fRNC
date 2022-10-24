@@ -2,7 +2,7 @@
 % Please edit documentation in R/savelocalM.R
 \name{savelocalM}
 \alias{savelocalM}
-\title{save and plot module}
+\title{save and plot module with local method}
 \usage{
 savelocalM(res.list_local)
 }
@@ -14,4 +14,17 @@ the plot and the format XGMML of the each module, filenames is the seed node
 }
 \description{
 save and plot module for the method local result in the function runmodule
+}
+\examples{
+\dontrun{
+data("dataN")
+gene2weight <- combinp(dataN[,c("type","logFC","PValue")])
+interac <- interStringency(type = "transcription", spec ="hg",
+				stringency = "strict")
+interac <- interac[,c("node_gene_ID","type","target_gene_ID")]
+res.list_local <- runmodule(network = interac, gene2weight,
+ method = "local",maxsize=15, seletN = "MIMAT0000461")
+savelocalM(res.list_local)
+}
+
 }
