@@ -11,28 +11,23 @@ interStringency(
 )
 }
 \arguments{
-\item{type}{a character string indicating which interaction type is to be choosed,
-. One of "Protein" (RBP-circRNA,RBP-lncRNA,miRNA-circRNA,miRNA-lncRNA,RBP-miRNA,RBP-RBP), "transcription (miRNA-circRNA,miRNA-lncRNA,miRNA-RBP))": can be abbreviated}
+\item{type}{a character string indicating which interaction type is to be choosed
+. One of "Protein" (RBP-circRNA, RBP-lncRNA, miRNA-circRNA, miRNA-lncRNA, RBP-miRNA, RBP-RBP), "transcription (miRNA-circRNA,miRNA-lncRNA,miRNA-RBP))": can be abbreviated}
 
-\item{spec}{a character string indicating which species is to be choosed,
+\item{spec}{a character string indicating which species is to be choosed
 . One of "hg", "mm": can be abbreviated}
 
-\item{stringency}{a character string indicating which interaction stringency is to be choosed,
+\item{stringency}{a character string indicating which interaction stringency is to be choosed
 . One of "low" ( number of supported experiments > = 1 or combined_score >= 150 or score >=0 ), "medium ( > = 2 or combined_score >= 400 or score >=5)","high ( > = 3 or combined_score >= 700 or score >=10)","strict ( > = 5 or combined_score >= 900, or score >=20)"}
 }
 \value{
-interaction of setting
+Satisfactory interaction matrix. It contain five colnames:"node_gene_ID", "node_gene_Name", "type", "target_gene_ID", "target_gene_Name"
 }
 \description{
 interactions were extracted according to stringency and interaction type in the database of ENCORI
 }
 \examples{
 \dontrun{
-  #data("dataM2C")
-#data("dataM2L")
-#data("dataM2R")
-#data("dataR2C")
-#data("dataR2L")
  interac <- interStringency(type = "Protein",spec ="hg", stringency = "strict")
  interac <- interac[,c("node_gene_ID","target_gene_ID")]
 }
